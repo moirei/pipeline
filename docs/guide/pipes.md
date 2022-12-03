@@ -68,8 +68,8 @@ $value = pipeline(...)->pipe(
 
 ## Context methods
 
-If you'er using context's, you may pipe to a method defined in the context.
-Use if you want all your pipes to be encapsulated in one class.
+If you'er using contexts, you may pipe to a method defined in the context.
+Useful if you want all your pipes to be encapsulated in one class.
 
 ```php
 class Calculator{

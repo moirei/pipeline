@@ -306,6 +306,22 @@ trait HasPipelineOperators
     }
 
     /**
+     * Switch the payload through the provided pipes.
+     * Resolves an array coresponding to the forks
+     *
+     * @param  int  $number
+     * @param  callable  $numberFn
+     * @return Closure
+     */
+    public static function times(int $number, callable $numberFn)
+    {
+        return function ($payload) use ($number, $numberFn) {
+            $array = range(1, $number);
+            return array_map(fn ($n) => $numberFn($payload, $n), $array);
+        };
+    }
+
+    /**
      * Ignore the payload and return given value.
      *
      * @param  mixed  $value

@@ -4,15 +4,23 @@
 
 Converts pipeline payload to `Collection`.
 
+```php
+$collection = pipeline()->with([1, 2, 3])->pipe(
+  \pipe::map(fn ($v) => $v * 2),
+  \pipe::collect(),
+);
+```
+
 ## `filter`
 
 Performs a filter operation on the payload. Payload is wrapped as an array if it's not one.
 
 ```php
-$pipeline = pipeline([2, 3, null])->through(
+$value = pipeline([2, 3, null])->pipe(
   \pipe::filter(),
-  fn ($v) => $v * 2
 );
+
+// yields [2, 3]
 ```
 
 You can provide a custom filter function
@@ -54,11 +62,12 @@ Concats values from provided pipes to the payload.
 $value = pipeline(3)->pipe(
   \pipe::concat(
     fn ($v) => $v * 2,
+    fn ($v) => $v * 3,
     ...
   ),
 );
 
-// yields [3, 6, ...]
+// yields [3, 6, 9, ...]
 ```
 
 Also accepts an array
@@ -69,6 +78,26 @@ $value = pipeline(3)->pipe(
     fn ($v) => $v * 2,
     fn ($v) => $v * 4,
   ]),
+);
+```
+
+If you want to concat pipes that depend on the result of the previous concat, call them separately
+
+```php
+$value = pipeline(3)->pipe(
+  \pipe::concat(fn ($v) => $v * 2),
+  \pipe::concat(fn (array $payload) => $payload[1] * 4),
+);
+
+// yields [3, 6, 24]
+```
+
+Same as below with `nth`
+
+```php
+$value = pipeline(3)->pipe(
+  \pipe::concat(fn ($v) => $v * 2),
+  \pipe::concat(\pipe::nth(1, fn ($v) => $v * 4)),
 );
 ```
 
@@ -318,6 +347,18 @@ $context = new class{
 pipeline(2)->context($context)->pipe(
   \pipe::tap('myMethod'),
 );
+```
+
+## `times`
+
+Run the payload through the provided function a number of times.
+
+```php
+$value = pipeline(1)->pipe(
+  \pipe::times(4, fn ($payload, $number) => ($number * 2) + $payload)
+);
+
+// yields [3, 5, 7, 9]
 ```
 
 ## `value`

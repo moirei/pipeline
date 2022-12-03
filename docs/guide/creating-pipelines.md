@@ -20,7 +20,7 @@ $value = Pipeline::with([2, 3])->pipe([
 
 ## Using global functions
 
-The above can be re-written using the available global function `pipeline` and class `pipe`.
+If you're not a fan of Facades, the above can be re-written using the available global function `pipeline` and class `pipe`.
 
 ```php
 $value = pipeline([2, 3])->pipe([
@@ -43,7 +43,7 @@ pipeline(
 );
 ```
 
-If `pipes` in not null, the pipeline is immidiatedly processed and the resulting value is returned
+If `pipes` is not null, the pipeline is immidiatedly processed and the resulting value is returned
 
 ```php
 $value = pipeline(2, [
@@ -65,4 +65,4 @@ $value = $pipeline->pipe([
 
 This a global class which exposes the operators as static methods for easy namespaced access.
 
-We don't want `\pipe::collect` overriding Laravel's `collect` function.
+We don't want something like `\pipe::collect` overriding Laravel's `collect` function.

@@ -26,6 +26,7 @@ use MOIREI\Pipeline\Pipeline as Instance;
  * @method static Closure  spreadArgs(mixed $handler)
  * @method static Closure  switch(callable|array $switcher)
  * @method static Closure  tap(callable|string $callable)
+ * @method static Closure  times(int $number, callable $numberFn)
  * @method static Closure  value(mixed $value)
  */
 class Pipeline extends Facade

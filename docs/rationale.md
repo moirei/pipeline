@@ -1,13 +1,13 @@
 # Rationale
 
-Sometimes Pipeline Pattern is what does the job. The example described in this page takes a single input (a checkout model) and spits out a collection of shipping methods. But what happens in-between is a complex group of actions (pipes).
+Sometimes Pipeline Pattern is what does the job. The example described in this page takes a single input (a checkout model) and spits out a collection of shipping methods. What happens in-between is an combination of a group of small functions (pipes).
 
-Another importance of this pattern is all the pipe classes can be fully unit tested in isolation.
+An important thing to note is all the pipe classes can be fully unit tested in isolation irrespective of the complexity.
 
 ```php
 // all pipes may access our context
 $context = new class(){
-    protected MessageBag $errors;
+    public MessageBag $errors;
 
     public function __construct()
     {
