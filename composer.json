@@ -1,0 +1,66 @@
+{
+  "name": "moirei/pipeline",
+  "description": "Simple Laravel pipeline library.",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Augustus",
+      "email": "augustusokoye@moirei.com"
+    }
+  ],
+  "keywords": [
+    "MOIREI",
+    "Laravel",
+    "actions",
+    "pipeline",
+    "rxphp"
+  ],
+  "scripts": {
+    "pint": "./vendor/bin/pint",
+    "pint:test": "./vendor/bin/pint --test",
+    "test": "./vendor/bin/pest"
+  },
+  "require": {
+    "php": "^8.0",
+    "illuminate/support": "^7|^8|^9",
+    "illuminate/contracts": "^7|^8|^9",
+    "laravel/helpers": "^1.5"
+  },
+  "require-dev": {
+    "pestphp/pest": "^1.21",
+    "pestphp/pest-plugin-laravel": "^1.2",
+    "orchestra/testbench": "^7.5",
+    "illuminate/contracts": "^7|^8|^9",
+    "phpunit/phpunit": "^9.5",
+    "thled/pest-plugin-shorthands": "^1.1",
+    "spatie/invade": "^1.1",
+    "laravel/pint": "^1.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "MOIREI\\Pipeline\\": "src",
+      "MOIREI\\Pipeline\\Tests\\": "tests"
+    },
+    "files": [
+      "src/global.php"
+    ]
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "MOIREI\\Pipeline\\PipelineServiceProvider"
+      ],
+      "aliases": {
+        "Pipeline": "MOIREI\\Pipeline\\Facades\\Pipeline"
+      }
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  }
+}
