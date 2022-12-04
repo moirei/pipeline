@@ -39,7 +39,7 @@ class MyPipe{
 }
 ```
 
-Class pipes can be used by provide the class name or an instance of the instance.
+Class pipes can be used by providing the class name or an instance of the instance.
 
 ```php
 $value = pipeline(...)->pipe(

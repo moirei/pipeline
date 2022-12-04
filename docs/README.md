@@ -16,5 +16,5 @@ footer: MIT Licensed | Copyright © 2022 MOIREI
 ---
 
 ::: slot heroText
-Laravek <b class="gradient">Pipeline</b>
+Laravel <b class="gradient">Pipeline</b>
 :::

@@ -194,7 +194,7 @@ Uses `Arr::except()`.
 
 ```php
 $value = pipeline()->pipe(
-  \pipe::on($value,
+  \pipe::on($condition,
     fn ($v) => $v * 2,
   ),
 );
@@ -250,7 +250,7 @@ Also accepts a defualt value
 
 This is practically not an operator.
 
-In the event the payload is an array of values, `spreadArgs` may be used to wrap pipe handler in order to use payload values as arguments.
+In the event the payload is an array of values, `spreadArgs` may be used to wrap the pipe in order to use payload values as arguments.
 
 ```php
 
@@ -293,7 +293,7 @@ Also accepts closures and pipes as usual
 
 ## `switch`
 
-Forks the payload data through provided pipelines and returns an array from each result.
+Forks the payload data through provided pipelines and returns an array representation of each result.
 
 This operator only accepts an array of pipes or a function that returns an array of pipes.
 
