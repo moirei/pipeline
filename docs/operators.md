@@ -321,17 +321,22 @@ Use a function if you need to access the payload data
 
 ## `tap`
 
-This is not an operator.
+The operator does not make.
 
 Allows you to tap into the payload at any given stage.
 
 ```php
 $value = pipeline(2)->pipe(
-  \pipe::tap(function($payload){
-    //
-  }),
+  \pipe::tap(
+    function($payload){
+      //
+    },
+    MyPipe::class,
+  ),
 );
 ```
+
+> Note: closures pasted to the `tap` operator have local context.
 
 You can also call a method defined in the context.
 

@@ -217,14 +217,15 @@ trait HasPipelineOperators
     /**
      * Iteratively reduce the payload array to a single value using a callback function.
      *
-     * @param callable  $callback
-     * @param mixed  $initial
+     * @param  callable  $callback
+     * @param  mixed  $initial
      * @return Closure
      */
     public static function reduce(callable $callback, $initial = null)
     {
         return function ($payload) use ($callback, $initial) {
             $payload = Helpers::wrap($payload);
+
             return array_reduce($payload, $callback, $initial);
         };
     }
@@ -245,13 +246,13 @@ trait HasPipelineOperators
                 $pipe = Closure::bind($pipe, $this);
 
                 return $pipe(...$payload);
-            } elseif (is_string($pipe) && !class_exists($pipe)) {
+            } elseif (is_string($pipe) && ! class_exists($pipe)) {
                 return $this->context->$pipe(...$payload);
-            } elseif (!is_object($pipe)) {
+            } elseif (! is_object($pipe)) {
                 [$name, $parameters] = $this->parsePipeString($pipe);
 
                 $pipe = $this->getContainer()->make($name);
-                if (!property_exists($pipe, 'context')) {
+                if (! property_exists($pipe, 'context')) {
                     // set the context for the pipeline
                     $pipe->context = $this->context;
                 }
@@ -289,16 +290,22 @@ trait HasPipelineOperators
     /**
      * Tap the pipeline.
      *
-     * @param  callable|string  $callable
+     * @param  array|mixed  $pipes
      * @return Closure
      */
-    public static function tap(callable|string $callable)
+    public static function tap($pipes)
     {
-        return function ($payload) use ($callable) {
-            if (is_string($callable)) {
-                $this->context->$callable($payload);
-            } else {
-                $callable($payload);
+        $pipes = is_array($pipes) ? $pipes : func_get_args();
+
+        return function ($payload) use ($pipes) {
+            $copy = is_object($payload) ? clone $payload : $payload;
+
+            foreach ($pipes as $pipe) {
+                if (is_callable($pipe)) {
+                    $pipe($copy);
+                } else {
+                    $this->clone()->with($copy)->pipe($pipe);
+                }
             }
 
             return $payload;
@@ -317,6 +324,7 @@ trait HasPipelineOperators
     {
         return function ($payload) use ($number, $numberFn) {
             $array = range(1, $number);
+
             return array_map(fn ($n) => $numberFn($payload, $n), $array);
         };
     }

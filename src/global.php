@@ -3,7 +3,7 @@
 use MOIREI\Pipeline\HasPipelineOperators;
 use MOIREI\Pipeline\Pipeline;
 
-if (!function_exists('pipeline')) {
+if (! function_exists('pipeline')) {
     /**
      * Create a new pipeline
      *
@@ -21,16 +21,16 @@ if (!function_exists('pipeline')) {
     ) {
         /** @var Pipeline */
         $pipeline = app()->make(Pipeline::class);
-        if (!is_null($payload)) {
+        if (! is_null($payload)) {
             $pipeline->with($payload);
         }
-        if (!is_null($context)) {
+        if (! is_null($context)) {
             $pipeline->context($context);
         }
-        if (!is_null($method)) {
+        if (! is_null($method)) {
             $pipeline->via($method);
         }
-        if (!is_null($pipes)) {
+        if (! is_null($pipes)) {
             return $pipeline->pipe($pipes);
         }
 
@@ -38,7 +38,7 @@ if (!function_exists('pipeline')) {
     }
 }
 
-if (!class_exists('pipe')) {
+if (! class_exists('pipe')) {
     class pipe
     {
         use HasPipelineOperators;
