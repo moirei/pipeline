@@ -67,7 +67,7 @@ class Pipeline
     public function with($payload, $context = null)
     {
         $this->payload = $payload;
-        if (! is_null($context)) {
+        if (!is_null($context)) {
             $this->context($context);
         }
 
@@ -204,29 +204,29 @@ class Pipeline
          */
         return function ($payload, $pipe) {
             try {
+                if ($pipe instanceof Pipe) {
+                    // If the pipe is a Pipe instance, then it's called directly with the pipeline.
+                    return $pipe->handle($payload, $this);
+                }
                 if (is_callable($pipe)) {
-                    // If the pipe is a callable, then it's called directly, otherwise resolve the
-                    // pipes out of the dependency container and call it with the appropriate method
-                    // and arguments, returning the results back out.
-                    $pipe = Closure::bind($pipe, $this);
-
+                    // If the pipe is a callable, then it's called directly.
                     return $pipe($payload);
                 } elseif ($pipe instanceof Pipeline) {
                     // if the pipe is a pipeline, process the payload through it
                     // used current context and via method
                     return $pipe->with($payload, $this->context)->via($this->method)->run();
-                } elseif (is_string($pipe) && ! class_exists($pipe)) {
+                } elseif (is_string($pipe) && !class_exists($pipe)) {
                     // if the pipe is a string and not a class, call it as a method
                     // of the context
                     return $this->context->$pipe($payload);
-                } elseif (! is_object($pipe)) {
+                } elseif (!is_object($pipe)) {
                     [$name, $parameters] = $this->parsePipeString($pipe);
 
                     // If the pipe is a string we will parse the string and resolve the class out
                     // of the dependency injection container. We can then build a callable and
                     // execute the pipe function giving in the parameters that are required.
                     $pipe = $this->getContainer()->make($name);
-                    if (! property_exists($pipe, 'context')) {
+                    if (!property_exists($pipe, 'context')) {
                         // set the context for the pipeline
                         $pipe->context = $this->context;
                     }
@@ -286,7 +286,7 @@ class Pipeline
      */
     protected function getContainer()
     {
-        if (! $this->container) {
+        if (!$this->container) {
             throw new RuntimeException('A container instance has not been passed to the Pipeline.');
         }
 

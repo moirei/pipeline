@@ -6,3 +6,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ## 0.1.2
 
 - feat: make `tap` operator more robust
+
+## 0.2.0
+
+- refactor: use `Pipe` class to represent pipe operators

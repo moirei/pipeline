@@ -3,9 +3,9 @@
 uses()->group('operators', 'null-operator');
 
 it('expects null operator to return null', function () {
-    $fn = \pipe::null();
+    $pipe = \pipe::null();
 
-    $value = $fn();
+    $value = $pipe->handle(0, $this->pipeline);
 
     expect($value)->toBeNull();
 });

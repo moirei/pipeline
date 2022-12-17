@@ -336,8 +336,6 @@ $value = pipeline(2)->pipe(
 );
 ```
 
-> Note: closures pasted to the `tap` operator have local context.
-
 You can also call a method defined in the context.
 
 ```php

@@ -3,13 +3,11 @@
 uses()->group('operators', 'spreadArgs-operator');
 
 it('should spread payload as arguments to callable', function () {
-    $fn = $this->fakePipelineBind(
-        \pipe::spreadArgs(
-            fn ($v1, $v3) => $v1 + $v3
-        )
+    $pipe = \pipe::spreadArgs(
+        fn ($v1, $v3) => $v1 + $v3
     );
 
-    $value = $fn([2, 3]);
+    $value = $pipe->handle([2, 3], $this->pipeline);
 
     expect($value)->toEqual(5);
 });
@@ -34,10 +32,9 @@ it('should spread payload as arguments to context method', function () {
         }
     };
 
-    $fn = \pipe::spreadArgs('myMethod');
-    $fn = Closure::bind($fn, $pipeline);
+    $pipe = \pipe::spreadArgs('myMethod');
 
-    $value = $fn([2, 3]);
+    $value = $pipe->handle([2, 3], $pipeline);
 
     expect($value)->toEqual(5);
 });
@@ -51,11 +48,9 @@ it('should spread payload as arguments to object handler', function () {
         }
     };
 
-    $fn = $this->fakePipelineBind(
-        \pipe::spreadArgs($pipe)
-    );
+    $pipe = \pipe::spreadArgs($pipe);
 
-    $value = $fn([2, 3]);
+    $value = $pipe->handle([2, 3], $this->pipeline);
 
     expect($value)->toEqual(5);
 });

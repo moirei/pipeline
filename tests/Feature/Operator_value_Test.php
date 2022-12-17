@@ -3,9 +3,9 @@
 uses()->group('operators', 'value-operator');
 
 it('expects value operator to value', function () {
-    $fn = \pipe::value(2);
+    $pipe = \pipe::value(2);
 
-    $value = $fn();
+    $value = $pipe->handle(0, $this->pipeline);
 
     expect($value)->toEqual(2);
 });

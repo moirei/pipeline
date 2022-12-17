@@ -11,4 +11,16 @@
 |
 */
 
-uses(MOIREI\Pipeline\Tests\TestCase::class)->in('Feature');
+uses(MOIREI\Pipeline\Tests\TestCase::class)
+  ->beforeEach(function () {
+    $this->pipeline = new class
+    {
+      public $method = 'handle';
+
+      public function clone()
+      {
+        return pipeline();
+      }
+    };
+  })
+  ->in('Feature');
