@@ -2,7 +2,7 @@
 
 ## Closures
 
-The basic way to defined a pipe is passing closures.
+The basic way to define a pipe is passing closures.
 
 ```php
 $value = pipeline([2, 4])->pipe(
@@ -39,7 +39,7 @@ class MyPipe{
 }
 ```
 
-Class pipes can be used by providing the class name or an instance of the instance.
+Class pipes can be used by providing the class name or an instance of the class.
 
 ```php
 $value = pipeline(...)->pipe(

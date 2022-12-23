@@ -63,6 +63,6 @@ $value = $pipeline->pipe([
 
 ### `pipe`
 
-This a global class which exposes the operators as static methods for easy namespaced access.
+This is a global class that exposes the operators as static methods for easy namespaced access.
 
 We don't want something like `\pipe::collect` overriding Laravel's `collect` function.

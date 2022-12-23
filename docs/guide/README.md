@@ -25,7 +25,7 @@ The pipeline class has a `through` and a `pipe` method. Using `pipe` immediately
 
 When using classes for pipes, the default handler method is `handle` or `__invoke`.
 
-Use the `via` method to specified a different handler.
+Use the `via` method to specify a different handler.
 
 ```php
 class MyPipe{
@@ -41,4 +41,4 @@ $pipeline = Pipeline::via('myMethod')->through(
 );
 ```
 
-Not that the specified method has to be consistent with all pipes.
+Note that the specified method has to be consistent with all pipes.

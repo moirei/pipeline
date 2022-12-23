@@ -2,7 +2,7 @@
 
 ## Use strict types
 
-It is recommended to explicitely define expected types all through you pipes. Espetially when working with complex pieplines. This would allow you to ensure your pipes receive the expected data type.
+It is recommended to explicitely define expected types all through your pipes. Espetially when working with complex pieplines. This would allow you to ensure your pipes receive the expected data type.
 
 For example, the below will fail on `locations` since we're expecting a `Collection` and not an `array`.
 
@@ -18,7 +18,7 @@ class GetLineItemRates{
   }
 }
 
-$shippingRates = Pipeline::pipe(
+$shippingRates = Pipeline::with($checkout)->pipe(
   GetShippableItems::class,
   Pipeline::map(
     Pipeline::concat(GetLineItemShippingProfile::class),

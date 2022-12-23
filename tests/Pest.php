@@ -13,14 +13,14 @@
 
 uses(MOIREI\Pipeline\Tests\TestCase::class)
   ->beforeEach(function () {
-    $this->pipeline = new class
-    {
-      public $method = 'handle';
-
-      public function clone()
+      $this->pipeline = new class
       {
-        return pipeline();
-      }
-    };
+          public $method = 'handle';
+
+          public function clone()
+          {
+              return pipeline();
+          }
+      };
   })
   ->in('Feature');

@@ -244,13 +244,13 @@ trait HasPipelineOperators
                 $pipe = Closure::bind($pipe, $this);
 
                 return $pipe(...$payload);
-            } elseif (is_string($pipe) && !class_exists($pipe)) {
+            } elseif (is_string($pipe) && ! class_exists($pipe)) {
                 return $this->context->$pipe(...$payload);
-            } elseif (!is_object($pipe)) {
+            } elseif (! is_object($pipe)) {
                 [$name, $parameters] = $this->parsePipeString($pipe);
 
                 $pipe = $this->getContainer()->make($name);
-                if (!property_exists($pipe, 'context')) {
+                if (! property_exists($pipe, 'context')) {
                     // set the context for the pipeline
                     $pipe->context = $this->context;
                 }

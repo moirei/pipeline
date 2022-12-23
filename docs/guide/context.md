@@ -1,7 +1,7 @@
 # Context
 
 Pipelines are generally atomic and each pipe is stateless. But in some cases you might want to hold a common state reference as you progress through your pipes.
-The example below allows the pipes to add error messages into a common message bag which is then validated by the final operator.
+The example below allows the pipes to add error messages into a common message bag which is then validated by the final pipe.
 
 ```php
 use Illuminate\Support\MessageBag;

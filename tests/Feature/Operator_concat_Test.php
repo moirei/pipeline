@@ -14,7 +14,7 @@ it('should concat pipes', function () {
 });
 
 it('should accept multiple arguments', function () {
-    $pipe =  \pipe::concat(
+    $pipe = \pipe::concat(
         fn ($v) => $v * 2,
         fn ($v) => $v * 3,
     );

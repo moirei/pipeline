@@ -190,8 +190,6 @@ $value = pipeline([2, 3, 4])->pipe(
 
 On a given condition run the payload through the pipeline.
 
-Uses `Arr::except()`.
-
 ```php
 $value = pipeline()->pipe(
   \pipe::on($condition,
@@ -248,7 +246,7 @@ Also accepts a defualt value
 
 ## `spreadArgs`
 
-This is practically not an operator.
+This is technically not an operator.
 
 In the event the payload is an array of values, `spreadArgs` may be used to wrap the pipe in order to use payload values as arguments.
 
@@ -262,7 +260,7 @@ class CalculateShippingMethods{
 
 ...
 
-$methods = pipeline($checkout)->pipe(
+$shippingMethods = pipeline($checkout)->pipe(
   GetShippableItems::class,
   \pipe::map(
     \pipe::concat(
@@ -312,11 +310,14 @@ $value = pipeline(2)->pipe(
 Use a function if you need to access the payload data
 
 ```php
-\pipe::switch(fn ($payload) => [
-  fn ($v) => $v * 2,
-  fn ($v) => $v * 4,
-  fn ($v) => $v * 6,
-]),
+\pipe::switch(function ($payload){
+  // do something with payload
+  ...
+  return [
+    MyPipe::class,
+    ...
+  ];
+}),
 ```
 
 ## `tap`
